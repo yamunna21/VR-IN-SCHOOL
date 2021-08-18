@@ -1,0 +1,67 @@
+import viz
+import vizfx
+import vizcam
+
+#Enable full screen anti-aliasing (FSAA) to smooth edges
+viz.setMultiSample(4)
+
+viz.go()
+
+#Increase the Field of View
+viz.MainWindow.fov(95)
+#viz.collision(viz.ON) 
+
+#school = viz.addChild('九尺小学报建-胡明奇-20080925.osgb')
+school = viz.addChild('school.osgb')
+faculty = viz.addChild('college.osgb', scene=viz.Scene2)
+#school = viz.addChild('college2.osgb')
+school.setPosition(-50, 0.0, 0)
+school.setScale(0.7, 1.0, 0.5)
+faculty.setPosition([0.0,0.0,0.0])
+
+#skybox
+sky = viz.addChild('sky_day.osgb')
+#skybox= viz.addchild('sky_day.osgb', scene=viz.Scene2)
+skybox = sky.copy(scene=viz.Scene2)
+
+#Chaning mouse movement speed
+viz.mouse.setScale(3,1)
+
+#Light Source
+light = vizfx.addDirectionalLight(euler=(0,90,0), color=viz.WHITE)
+light = vizfx.addDirectionalLight(euler=(0,90,0), color=viz.WHITE)
+
+#player Viewpoint & Navigation
+viz.MainView.setPosition([0,15,15])
+#flyNav = vizcam.FlyNavigate()
+#vizcam.WalkNavigate()
+
+#Add characters
+male = viz.addAvatar('vcc_male.cfg')
+male.setPosition([105, 8, 65])
+male.setEuler([0,0,0])
+male.state(9)
+
+female = viz.addAvatar('vcc_female.cfg')
+female.setPosition([105, 8, 68])
+female.setEuler([180,0,0])
+female.state(8)
+
+male2 = viz.addAvatar('vcc_male2.cfg')
+male2.setPosition([88.5, 8.4, 103.5])
+male2.setEuler([325,0,0])
+male2.state(4)
+
+female2 = viz.addAvatar('vcc_female.cfg')
+female2.setPosition([83, 8.4, 109])
+female2.setEuler([140,0,0])
+female2.state(3)
+
+male3 = viz.addAvatar('vcc_male.cfg')
+male3.setPosition([75, 8.4, 75])
+male3.setEuler([0,0,0])
+male3.state(9)
+
+#Add keypresses to change between scenes 1 and 2
+vizact.onkeydown( '1', viz.MainWindow.setScene, viz.Scene1 )
+vizact.onkeydown( '2', viz.MainWindow.setScene, viz.Scene2 )
